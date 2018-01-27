@@ -9,5 +9,5 @@ It includes a unified stack composed of:
  - __Cluster Managers__:
 
 
-[Index](./Spark.md)
-[Next](./Spark_chapter2.md)
+[- Index](./Spark.md)  
+[> Next](./Spark_chapter2.md)  

@@ -4,6 +4,6 @@ A Resilient Distributed Dataset (RDD) is simply a distributed collection of elem
 The RDDs can contain and manipulate any type of data, even user created objects. In our previous examples, we were manipulating RDDs of strings.  
 
 
-[Index](./Spark.md)
-[Previous](./Spark_chapter2.md)
-[Next](./Spark_chapter4.md)
+[- Index](./Spark.md)  
+[< Previous](./Spark_chapter2.md)  
+[> Next](./Spark_chapter4.md)
