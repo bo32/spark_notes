@@ -92,3 +92,8 @@ When building a standalone application, we first need to implement a Spark Conte
 $ mvn clean build
 $ ~/spark-2.2.1-bin-hadoop2.7/bin/spark-submit target/spark-standalone-app-0.0.1-SNAPSHOT.jar 
 ```
+
+
+[Index](./Spark.md)
+[Previous](./Spark_chapter1.md)
+[Next](./Spark_chapter3.md)
