@@ -1,0 +1,5 @@
+# Core Spark Concepts
+A Spark application launches parallel operations on a cluster.
+A SparkContext object is created by the Spark app, that is a conection to a cluster. It's stored in the *sc* variable.
+
+When having a cluster, executing a command like lines.count() will be managed by a cluster.
