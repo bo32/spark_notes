@@ -75,10 +75,7 @@ In these examples, `filter()` does not mutate `inputRDD`, but returns a pointer 
 ```
 
 Spark keeps track of the RDDs and where they come from. In the previous example, `badLinesRDD` comes from the union of `warningsRDD` and `errorsRDD`, both coming from a filtering of `inputRDD`.  
-This is called the **_lineage graph_** (a bit like a family tree).  
-![alt text](./ch3_lineage_graphe.svg "Example of lineage graph")
-
-
+This is called the **_lineage graph_** (a bit like a family tree).
 
 ### Actions
 
