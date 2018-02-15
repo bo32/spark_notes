@@ -45,9 +45,42 @@ lines = sc.textFile("./README.md");
 ```
 
 ## RDD Operations
+**Transformations return a new RDD, and Actions return a result.**
+
+### Transformations
+Transformations return a new RDD and are performed lazily, only at the moment of a call of an action.
+
+```python
+>>> inputRDD = sc.textFile("log.txt")
+>>> errorsRDD = inputRDD.filter(lambda x: "error" in x)
+```
+
+```java
+JavaRDD<String> inputRDD = sc.textFile("log.txt");
+JavaRDD<String> errorsRDD = inputRDD.filter(
+    new Function<String, Boolean>() {
+        public Boolean call(String x) {
+            return x.contains("error");
+        }
+    }
+);
+```
+
+In these examples, `filter()` does not mutate `inputRDD`, but returns a pointer to a new RDD. `inputRDD` can then be reused later on:
+
+```python
+>>> errorsRDD = inputRDD.filter(lambda x: "error" in x)
+>>> warningsRDD = inputRDD.filter(lambda x: "warning" in x)
+>>> badLinesRDD = errorsRDD.union(warningsRDD)
+```
+
+Spark keeps track of the RDDs and where they come from. In the previous example, `badLinesRDD` comes from the union of `warningsRDD` and `errorsRDD`, both coming from a filtering of `inputRDD`.  
+This is called the **_lineage graph_** (a bit like a family tree).  
+![alt text](./ch3_lineage_graphe.svg "Example of lineage graph")
 
 
 
+### Actions
 
 
 [- Index](./Spark.md)  
