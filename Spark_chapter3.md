@@ -45,7 +45,7 @@ lines = sc.textFile("./README.md");
 ```
 
 ## RDD Operations
-**Transformations return a new RDD, and Actions return a result.**
+Transformations return a new RDD, and Actions return a result.
 
 ### Transformations
 Transformations return a new RDD and are performed lazily, only at the moment of a call of an action.
@@ -78,7 +78,7 @@ Spark keeps track of the RDDs and where they come from. In the previous example,
 This is called the **_lineage graph_** (a bit like a family tree).
 
 ### Actions
-
+They are the operations that return a result to the program or write data on an external storage system.
 
 [- Index](./Spark.md)  
 [< Previous](./Spark_chapter2.md)  
