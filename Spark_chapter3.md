@@ -51,8 +51,8 @@ Transformations return a new RDD, and Actions return a result.
 Transformations return a new RDD and are performed lazily, only at the moment of a call of an action.
 
 ```python
->>> inputRDD = sc.textFile("log.txt")
->>> errorsRDD = inputRDD.filter(lambda x: "error" in x)
+inputRDD = sc.textFile("log.txt")
+errorsRDD = inputRDD.filter(lambda x: "error" in x)
 ```
 
 ```java
@@ -69,9 +69,9 @@ JavaRDD<String> errorsRDD = inputRDD.filter(
 In these examples, `filter()` does not mutate `inputRDD`, but returns a pointer to a new RDD. `inputRDD` can then be reused later on:
 
 ```python
->>> errorsRDD = inputRDD.filter(lambda x: "error" in x)
->>> warningsRDD = inputRDD.filter(lambda x: "warning" in x)
->>> badLinesRDD = errorsRDD.union(warningsRDD)
+errorsRDD = inputRDD.filter(lambda x: "error" in x)
+warningsRDD = inputRDD.filter(lambda x: "warning" in x)
+badLinesRDD = errorsRDD.union(warningsRDD)
 ```
 
 Spark keeps track of the RDDs and where they come from. In the previous example, `badLinesRDD` comes from the union of `warningsRDD` and `errorsRDD`, both coming from a filtering of `inputRDD`.  
@@ -79,6 +79,57 @@ This is called the **_lineage graph_** (a bit like a family tree).
 
 ### Actions
 They are the operations that return a result to the program or write data on an external storage system.
+
+Here an example of actions based on `badLinesRDD` defined above:
+```python
+print "badLinesRDD had " + badLinesRDD.count() + " lines."
+print "Here are 10 of them:"
+for line in badLinesRDD.take(10):
+    print line
+```
+See [this python code](./ch3_standalone_badlines.py) for a standalone example.
+
+```java
+System.out.println("badLinesRDD had " + badLinesRDD.count() + " lines.")
+System.out.println("Here are 10 of them:")
+for (String line: badLinesRDD.take(10)) {
+    System.out.println(line);
+}
+```
+
+The `take()` method retrieves a small number of elements of the RDD, so we can then loop on them.  
+`collect()` does the same, but retrieves all the elements of the RDD. We need to be careful though with the latter, as the entire dataset should fit in the memory of a single machine, so it should not be used on large datasets.
+
+Every time an action is called, the entire RDD is calculated from scratch, which can be inefficient. We can then persist intermediate results to prevent from this [more here](#persistence-caching).
+
+### Lazy Evaluation
+Since the transformations are lazy, it's best to think of transformations as instructions on how to compute the data, instead as a "dataset" or RDD that would contain the data.  
+In practive, when Spark sees a transformation, it records it internally as some metadata.  
+Loading data from a source (like a file), is also lazily performed.
+
+## Passing functions to Spark
+Functions can be passed into Spark and used to compute data. They have different specificities according to the Spark core language.
+
+### Python
+We can use [lambda functions](https://en.wikipedia.org/wiki/Anonymous_function#Python) (mini-functions defined on the fly):
+```python
+word = rdd.filter(lambda s: "error" in s)
+```
+
+We can also use locally defined functions:
+```python
+def containsError(s):
+    return "error" in s
+word = rdd.filter(containsError)
+```
+When doing this, we must be careful that we don't pass the object containing the function, which would cause passing larger data to the program.
+
+### Java
+### Scala
+
+## Persistence (Caching)
+
+**to be completed**
 
 [- Index](./Spark.md)  
 [< Previous](./Spark_chapter2.md)  
