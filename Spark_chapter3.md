@@ -11,19 +11,19 @@ Here is the creation of a RDD:
 * transformation: construction of a RDD from another. It returns a RDD.
 * action: calculates a result based on a RDD. It return a non-RDD data type object.
 
-Example of a `transformation`:
+Example of a **transformation**:
 ```python
 >>> pythonLines = lines.filter(lambda line: "Python" in line)
 ```
-Example of an `action`:
+Example of an **action**:
 ```python
 >>> pythonLines.first()
 ```
 
-The reason for the distinction between `transformations` and `actions` is, that Spark is lazy: the whole transformations are performed at the first called action, so that Spark saves some memory by loading only the necessary data.
+The reason for the distinction between **transformations** and **actions** is, that Spark is lazy: the whole transformations are performed at the first called action, so that Spark saves some memory by loading only the necessary data.
 In our example above, Spark doesn't do anything when calling `filter()`, but only does it when `first()` is called. So Spark knows that it doesn't have to read the whole file, since we only want the first line.
 
-If we want to reuse a RDD on multiple actions, we can `persist` it but using the `persist()` method. The RDD is then stored in memory (of the cluster).
+If we want to reuse a RDD on multiple actions, we can **persist** it but using the `persist()` method. The RDD is then stored in memory (of the cluster).
 
 ```python
 >>> pythonLines.persist()
