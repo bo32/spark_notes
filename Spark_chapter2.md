@@ -94,6 +94,6 @@ $ ~/spark-2.2.1-bin-hadoop2.7/bin/spark-submit target/spark-standalone-app-0.0.1
 ```
 
 
-[- Index](./Spark.md)  
+[- Index](./README.md)  
 [< Previous](./Spark_chapter1.md)  
 [> Next](./Spark_chapter3.md)
