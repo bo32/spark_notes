@@ -131,6 +131,6 @@ When doing this, we must be careful that we don't pass the object containing the
 
 **to be completed**
 
-[- Index](./Spark.md)  
+[- Index](./README.md)  
 [< Previous](./Spark_chapter2.md)  
 [> Next](./Spark_chapter4.md)
