@@ -135,9 +135,9 @@ In Java, a function is an object that implements the interface `org.apache.spark
 ## Common Transformations and Actions
 ### Basic RDDs
 #### Element-wise transformations
-* map(): takes a function as a parameter and applies to the all elements of the RDD.
-* filter(): takes a function as a parameter and returns the elements of the RDD matching the function.
-* flatmap(): similar to map(), it transforms each eelement of the RDD to 0 or more elements.
+* __map()__: takes a function as a parameter and applies to the all elements of the RDD.
+* __filter()__: takes a function as a parameter and returns the elements of the RDD matching the function.
+* __flatmap()__: similar to map(), it transforms each eelement of the RDD to 0 or more elements.
 
 ```java
 JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));
@@ -155,7 +155,48 @@ JavaRDD<Integer> splits = rdd.flatmap(new Function<String, String>() {
 });
 ```
 
+#### Pseudo set operations
+Spark also implements manipulation of sets:
+* __distinct()__: produces a new RDD with unique elements (the duplicates are removed). Expensive executionexecution, as it requires shuffling. The RDDs must be of the same type.
+* __union()__: returns a RDD containing the elements of 2 RDDs, including duplicates. The RDDs must be of the same type.
+* __intersection()__: returns a RDD containing elements only in both input RDDs, removing duplicates. Expensive execution, as it requires shuffling. The RDDs must be of the same type.
+* __substract()__: Returns a RDD that contains elements only in the first input RDD and not in the second. Expensive execution, as it requires shuffling. The RDDs must be of the same type.
+* __cartesian()__: returns the product of 2 RDDs (all combinaisons possible of the elements). Ex: RDD1 [1, 2] x RDD ["Spark", "ML"] -> RDD3 [{1, "Spark"}, {2, "Spark"}, {1, "ML"}, {2, "ML"}]. Expensive execution for large RDDs.
 
+#### Actions
+* __reduce()__: useful some some aggregations, it returns the result of an operation applied on the elements of the RDD. The result is an element of the same type of the elements in the RDD.
+```python
+sum = rdd.reduce(lambda x, y: x + y)
+```
+
+* __fold()__: same as `reduce()` but add a *zero value* or *identity element* for the first call of the function. Ex: 0 for an addiction, 1 for a product, an empty list for a concatenation... The result is an element of the same type of the elements in the RDD.
+
+* __aggregate()__: returns the result of an aggregation with a type that can be different from the type of the elements in the RDD. Also takes an *identity element*.
+```python
+sumCOunt = nums.aggregate((0, 0),
+    (lambda acc, value: (acc[0] + value, acc[1] + 1)),
+    (lambda acc1, acc2: (acc1[0] + acc2[0], acc1[1] + acc2[1]))
+)
+return sumCount[0] / float(sumCount[1])
+```
+
+* __collect()__: returns the elements of a RDD. Commonly used in unit tests.
+
+* __take()__: returns *n* first elements of a RDD.
+
+* __top()__: returns the *n* last elements of a RDD.
+
+* __takeOrdered()__: returns the *n* first elements of a RDD, according to the order defined by the ordering function passed as a parameter.
+
+* __takeSample()__: returns *n* elements of a RDD, randomly picked.
+
+* __foreach()__: applies a functions to the elements of the RDD.
+
+* __count()__: returns the number of elements of a RDD.
+
+* __countByValue()__: returns the number of occurences for each element of a RDD.
+
+### Converting between RDD types
 
 ## Persistence (Caching)
 
