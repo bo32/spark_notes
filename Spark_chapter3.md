@@ -122,7 +122,7 @@ def containsError(s):
     return "error" in s
 word = rdd.filter(containsError)
 ```
-When doing this, we must be careful that we don't pass the object containing the function, which would cause passing larger data to the program.
+When doing this, we must be careful that we don't pass the object containing the function, which would cause passing larger data to the program (like self.myproperty). Good practice would to extract the property value and pass to the function.
 
 ### Scala
 Inline functions, references to methods, or static functions can be passed in Scala.
@@ -151,6 +151,6 @@ JavaRDD<Integer> squares = rdd.map(new Function<Integer, Integer>() {
 
 **to be completed**
 
-[- Index](./Spark.md)  
+[- Index](./README.md)  
 [< Previous](./Spark_chapter2.md)  
 [> Next](./Spark_chapter4.md)

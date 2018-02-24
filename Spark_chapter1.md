@@ -9,5 +9,5 @@ Apache Spark is an open source project, created in 2009. It includes a unified s
  - __Cluster Managers__: scales up the charge of processing on several nodes / machines. Cluster managers can be Hadoop YARN, Apache Mesos, or Spark's own: Standalone Scheduler. More about it [here](./Spark_chapter7.md).
 
 
-[- Index](./Spark.md)  
+[- Index](./README.md)  
 [> Next](./Spark_chapter2.md)  
