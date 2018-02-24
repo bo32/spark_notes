@@ -124,8 +124,28 @@ word = rdd.filter(containsError)
 ```
 When doing this, we must be careful that we don't pass the object containing the function, which would cause passing larger data to the program.
 
-### Java
 ### Scala
+Inline functions, references to methods, or static functions can be passed in Scala.
+
+The inconvenient we have in Python is also present in Scala.
+
+### Java
+In Java, a function is an object that implements the interface `org.apache.spark.api.java.function.Function`.
+
+## Common Transformations and Actions
+### Basic RDDs
+#### Element-wise transformations
+* map(): takes a function as a parameter and applies to the all elements of the RDD.
+* filter(): takes a function as a parameter and returns the elements of the RDD matching the function.
+
+```java
+JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));
+JavaRDD<Integer> squares = rdd.map(new Function<Integer, Integer>() {
+    public Integer call(Integer x) {
+        return x * x;
+    }
+});
+```
 
 ## Persistence (Caching)
 
