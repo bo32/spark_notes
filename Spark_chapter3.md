@@ -168,9 +168,7 @@ Spark also implements manipulation of sets:
 ```python
 sum = rdd.reduce(lambda x, y: x + y)
 ```
-
 * __fold()__: same as `reduce()` but add a *zero value* or *identity element* for the first call of the function. Ex: 0 for an addiction, 1 for a product, an empty list for a concatenation... The result is an element of the same type of the elements in the RDD.
-
 * __aggregate()__: returns the result of an aggregation with a type that can be different from the type of the elements in the RDD. Also takes an *identity element*.
 ```python
 sumCOunt = nums.aggregate((0, 0),
@@ -179,21 +177,13 @@ sumCOunt = nums.aggregate((0, 0),
 )
 return sumCount[0] / float(sumCount[1])
 ```
-
 * __collect()__: returns the elements of a RDD. Commonly used in unit tests.
-
 * __take()__: returns *n* first elements of a RDD.
-
 * __top()__: returns the *n* last elements of a RDD.
-
 * __takeOrdered()__: returns the *n* first elements of a RDD, according to the order defined by the ordering function passed as a parameter.
-
 * __takeSample()__: returns *n* elements of a RDD, randomly picked.
-
 * __foreach()__: applies a functions to the elements of the RDD.
-
 * __count()__: returns the number of elements of a RDD.
-
 * __countByValue()__: returns the number of occurences for each element of a RDD.
 
 ### Converting between RDD types
