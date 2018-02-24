@@ -137,6 +137,7 @@ In Java, a function is an object that implements the interface `org.apache.spark
 #### Element-wise transformations
 * map(): takes a function as a parameter and applies to the all elements of the RDD.
 * filter(): takes a function as a parameter and returns the elements of the RDD matching the function.
+* flatmap(): similar to map(), it transforms each eelement of the RDD to 0 or more elements.
 
 ```java
 JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));
@@ -145,7 +146,16 @@ JavaRDD<Integer> squares = rdd.map(new Function<Integer, Integer>() {
         return x * x;
     }
 });
+
+rdd = sc.parallelize(Arrays.asList("Hi there", "Apache Spark", "Lorem ipsum dolor"));
+JavaRDD<Integer> splits = rdd.flatmap(new Function<String, String>() {
+    public Iterable<String> call(String words) {
+        return Arrays.asList(words.split(" "));
+    }
+});
 ```
+
+
 
 ## Persistence (Caching)
 
