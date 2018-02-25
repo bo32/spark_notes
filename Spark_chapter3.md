@@ -187,10 +187,35 @@ return sumCount[0] / float(sumCount[1])
 * __countByValue()__: returns the number of occurences for each element of a RDD.
 
 ### Converting between RDD types
+~~The functions mean() and variance() are only available on RDDs of numeric elements, or join() on key/value pairs RDDs.~~
+
+#### Scala
+The conversion is automatically done by implicit conversions.
+
+#### Java
+It's quite explicit in Java, and can be done with the classes JavaDoubleRDD and JavaPairRDD, for example.
+
+#### Python
+The conversion will fail at runtime if incorrect.
 
 ## Persistence (Caching)
+If we want to use the same RDD several times, Spark will by default recompute the RDD and the transformations, which can be expensive. A work around is to persist the RDD. The persisted data can be stored on different level:
+* MEMORY_ONLY 
+* MEMORY_ONLY_SER
+* MEMORY_AND_DISK
+* MEMORY_AND_DISK_SER
+* DISK_ONLY
 
-**to be completed**
+```python
+result = input.map(lambda x: x * x)
+result.persist()
+result.count()
+result.first()
+```
+
+The persisted RDDs can be manually removed by calling `unpersist()`.
+
+If too much data is stored in memory, the oldest persisted data will be removed, using the Least Recently used (LRU) cache policy.
 
 [- Index](./README.md)  
 [< Previous](./Spark_chapter2.md)  
