@@ -98,7 +98,7 @@ for (String line: badLinesRDD.take(10)) {
 ```
 
 The `take()` method retrieves a small number of elements of the RDD, so we can then loop on them.  
-`collect()` does the same, but retrieves all the elements of the RDD. We need to be careful though with the latter, as the entire dataset should fit in the memory of a single machine, so it should not be used on large datasets.
+`collect()` does the same, but retrieves all the elements of the RDD. We need to be careful though with the latter, as the entire dataset should fit in the memory of a single machine, so it should not be used on large datasets. That's why `take()` is a safer way to print elements of a RDD.
 
 Every time an action is called, the entire RDD is calculated from scratch, which can be inefficient. We can then persist intermediate results to prevent from this [more here](#persistence-caching).
 
