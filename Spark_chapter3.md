@@ -111,7 +111,7 @@ Loading data from a source (like a file), is also lazily performed.
 Functions can be passed into Spark and used to compute data. They have different specificities according to the Spark core language.
 
 ### Python
-We can use [lambda functions](https://en.wikipedia.org/wiki/Anonymous_function#Python) (mini-functions defined on the fly):
+We can use [lambda functions](https://stackoverflow.com/a/16509) (mini-functions defined on the fly):
 ```python
 word = rdd.filter(lambda s: "error" in s)
 ```
