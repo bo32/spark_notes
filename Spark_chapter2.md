@@ -31,6 +31,7 @@ $ ~/spark-2.2.1-bin-hadoop2.7/bin/spark-submit ch2_standalone_app.py
 ```
 
 ### Example in Java
+**pom.xml**
 ```xml
 <project 
     xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -68,6 +69,7 @@ $ ~/spark-2.2.1-bin-hadoop2.7/bin/spark-submit ch2_standalone_app.py
 </project>
 ```
 
+**Sample.java**
 ```java
 package com.david.spark;
 
