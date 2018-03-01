@@ -91,7 +91,7 @@ public class Sample {
 When building a standalone application, we first need to implement a Spark Context by providing it with a cluster (in our example `local`) and a name (in our example `My App`). The latter is a way of identifying the application.
 
 ```bash
-$ mvn clean build
+$ mvn clean package
 $ ~/spark-2.2.1-bin-hadoop2.7/bin/spark-submit target/spark-standalone-app-0.0.1-SNAPSHOT.jar 
 ```
 
